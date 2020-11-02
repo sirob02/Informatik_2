@@ -26,7 +26,7 @@ void buecher_read(FILE *infile,
 
       if (*num_buch >= MAXBUCH) {    /* Feldgroesse absichern */
          fprintf(stderr,
-                 " *** Hinweis: Mehr als %d B�cher auf der Datei!\n", MAXBUCH);
+                 " *** Hinweis: Mehr als %d Buecher auf der Datei!\n", MAXBUCH);
          break;
       }
 
@@ -62,22 +62,39 @@ void buch_add(char linebuf[],
     */
 
    const char *delim = ";\n";    /* CSV-Trennzeichen + NL! */
-
    /* Zeile zerlegen und Teile speichern */
    /* Titel;Autor;Verlag;Erscheinungsjahr;ISBN */
    buecher[*num_buch].titel            = strdup(strtok(linebuf, delim));
-   buecher[*num_buch].autor            = NULL;  /* TODO */
-   buecher[*num_buch].verlag           = NULL;  /* TODO */
-   buecher[*num_buch].erscheinungsjahr = 0;     /* TODO */
-   buecher[*num_buch].isbn             = NULL;  /* TODO */
+   buecher[*num_buch].autor            = NULL;  
+   buecher[*num_buch].verlag           = NULL;  
+   buecher[*num_buch].erscheinungsjahr = 0;     
+   buecher[*num_buch].isbn             = NULL;  
 
    /* Autor im bisherigen Autoren-Feld suchen, ggfs. neu anlegen,
     * pointer darauf im akt. Buch speichern */
-   /* TODO */
+   
+   int authorPosition = getAuthorPos(autoren,num_autor,strdup(strtok(NULL, delim)),MAXAUTOR);
+   if (authorPosition == -1){
+      return;
+   } 
+   //concat Book author
+   buecher[*num_buch].autor = &autoren[authorPosition];
+   buecher[*num_buch].autor->anz_buecher += 1;
 
    /* Verlag im bisherigen Verlage-Feld suchen, ggfs. neu anlegen,
     * pointer darauf im akt. Buch speichern */
-   /* TODO */
+
+   int verlagPosition = getVerlagPos(verlage,num_verlag,strdup(strtok(NULL, delim)),MAXVERLAG); 
+   if (verlagPosition == -1){
+      return;
+   }
+
+   //concat Book Verlag
+   buecher[*num_buch].verlag = &verlage[verlagPosition];
+   buecher[*num_buch].verlag->anz_buecher += 1; 
+   
+   buecher[*num_buch].erscheinungsjahr = atoi(strdup(strtok(NULL, delim)));      //add Erscheinungsjahr
+   buecher[*num_buch].isbn = strdup(strtok(NULL, delim));                        //add ISBN
 
    (*num_buch)++;
 
