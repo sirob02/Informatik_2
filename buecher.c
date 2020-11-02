@@ -18,7 +18,7 @@ int main() {
    enum {
       MAXBUCH   = 1000, /* Maximalzahl B�cher */
       MAXAUTOR  =  300, /* Maximalzahl Autoren */
-      MAXVERLAG =  100, /* Maximalzahl Verlage */
+      MAXVERLAG =  100, /* Maximalzahl Verlage 100*/      
       NUMTOP    =   20, /* Gr��e Bestenliste */
    };
 
@@ -42,15 +42,12 @@ int main() {
 
    /* Eingabedatei oeffnen und pruefen */
    if ((infile = fopen(infilename, "r")) == NULL) {
-      fprintf(stderr, " *** Fehler: Kann '%s' nicht zum Lesen oeffnen!\n",
-              infilename);
+      fprintf(stderr, " *** Fehler: Kann '%s' nicht zum Lesen oeffnen!\n",infilename);
       return 1;
    }
 
    /* alle B�cher-Datens�tze einlesen */
-   buecher_read(infile, buecher, &num_buch, MAXBUCH,
-                autoren, &num_autor, MAXAUTOR,
-                verlage, &num_verlag, MAXVERLAG);
+   buecher_read(infile, buecher, &num_buch, MAXBUCH,autoren, &num_autor, MAXAUTOR, verlage, &num_verlag, MAXVERLAG);
 
    /* Eingabedatei schliessen und Kontrollmeldung */
    fclose(infile);
@@ -66,12 +63,19 @@ int main() {
    printf("=== Eingelesene Buecher ===\n");
    buecher_print(buecher, num_buch);
 
-   printf("=== Top%d Verlage sortiert nach Anzahl Buecher ===\n", NUMTOP);
-   /* TODO */
+   printf("=== Top %d Verlage sortiert nach Anzahl Buecher ===\n", NUMTOP);
+
+   Verlag *vPerm[MAXVERLAG];
+   createVerlagPerm(vPerm,verlage,MAXVERLAG);
+   printTopVerlage(vPerm,num_verlag,NUMTOP);
+   
    printf("\n");
 
-   printf("=== Top%d Autoren sortiert nach Anzahl Buecher ===\n", NUMTOP);
-   /* TODO */
+   printf("=== Top %d Autoren sortiert nach Anzahl Buecher ===\n", NUMTOP);
+
+   Autor *aPerm[MAXAUTOR];
+   createAuthorPerm(aPerm,autoren,MAXAUTOR);
+   printTopAutoren(aPerm,num_autor,NUMTOP);
    printf("\n\n");
 
    return 0;

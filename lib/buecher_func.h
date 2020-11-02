@@ -60,7 +60,7 @@ void buch_print(const Buch *b);
 
 int getAuthorPos(Autor autoren[],int *num_autor,char *tmpAutor,const int MAXAUTOR);
 int getVerlagPos(Verlag verlage[],int *num_verlag,char *tmpVerlag,const int MAXVERLAG);
-int getVerlagPos(Verlag verlage[],int *num_verlag,char *tmpVerlag,const int MAXVERLAG);
+void createVerlagPerm(Verlag *vPerm[],Verlag verlage[],int MAXVERLAG);
 void printTopVerlage(Verlag* vPerm[],int num_verlag,int N);
 int cmpVerlage(const void *a,const void *b);
 void createAuthorPerm(Autor *aPerm[],Autor autoren[],int MAXAUTOR);
