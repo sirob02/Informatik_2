@@ -1,4 +1,4 @@
-#include "../lib/buecher_func.h"
+#include "buecher_func.h"
 
 /**TODO
  *  check if Author available otherwise add new
