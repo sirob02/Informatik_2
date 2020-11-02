@@ -1,4 +1,4 @@
-#include "buecher_func.h"
+#include "../lib/buecher_func.h"
 
 /**TODO
  *  check if Author available otherwise add new
@@ -75,7 +75,7 @@ int cmpVerlage(const void *a,const void *b){
 /**TODO
  *  create Permutationsvektor of Author */
 void createAuthorPerm(Autor *aPerm[],Autor autoren[],int MAXAUTOR){
-    for(int i = 0; i< MAXAUTOR; i++){
+    for(int i = 0; i < MAXAUTOR; i++){
         aPerm[i] = &(autoren[i]);
     }
 }
