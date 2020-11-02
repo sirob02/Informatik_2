@@ -2,7 +2,7 @@
 #define BUECHER_FUNC_H
 /***********************************************************************
  * buecher_func.h
- * Headerfile der Sammlung von Funktionen zur Bücherlisten-Verwaltung
+ * Headerfile der Sammlung von Funktionen zur Bï¿½cherlisten-Verwaltung
  *
  * Autor: H. Radners (Rumpfprogramm)
  ***********************************************************************/
@@ -13,13 +13,13 @@
 /* Struktur einer Autor-Definition */
 typedef struct {
    char *name;                   /* Zeiger auf vollstdg. Namen dieses Autors */
-   unsigned short anz_buecher;   /* Anzahl der Bücher dieses Autors */
+   unsigned short anz_buecher;   /* Anzahl der Bï¿½cher dieses Autors */
 } Autor;
 
 /* Struktur einer Verlag-Definition */
 typedef struct {
    char *name;                   /* Zeiger auf vollstdg. Namen dieses Verlags */
-   unsigned short anz_buecher;   /* Anzahl der Bücher dieses Verlags */
+   unsigned short anz_buecher;   /* Anzahl der Bï¿½cher dieses Verlags */
 } Verlag;
 
 /* Struktur einer Buch-Definition */
@@ -37,14 +37,14 @@ void buecher_read(FILE *infile,
                   Autor autoren[], int *num_autor, const int MAXAUTOR,
                   Verlag verlage[], int *num_verlag, const int MAXVERLAG);
 /* Liest das komplette Eingabe-file zeilenweise von (bereits
- * geöffnetem) infile ein */
+ * geï¿½ffnetem) infile ein */
 
 
 void buch_add(char linebuf[],
               Buch buecher[], int *num_buch,
               Autor autoren[], int *num_autor, const int MAXAUTOR,
               Verlag verlage[], int *num_verlag, const int MAXVERLAG);
-/* Erhält die eingelesene Eingabezeile eines Buch-Datensatzes,
+/* Erhï¿½lt die eingelesene Eingabezeile eines Buch-Datensatzes,
  * zerlegt diese am Trennzeichen in die Attribute und speichert diese.
  * In der Buch-Struktur werden Zeiger auf dessen Autor- und Verlag-
  * Element gespeichert.
@@ -52,11 +52,19 @@ void buch_add(char linebuf[],
 
 
 void buecher_print(Buch buecher[], const int num_buch);
-/* Iteriert über Bücherliste zur Ausgabe */
+/* Iteriert ï¿½ber Bï¿½cherliste zur Ausgabe */
 
 
 void buch_print(const Buch *b);
-/* Gibt ausgewählte Attribute eines Buches formatiert aus */
+/* Gibt ausgewï¿½hlte Attribute eines Buches formatiert aus */
 
+int getAuthorPos(Autor autoren[],int *num_autor,char *tmpAutor,const int MAXAUTOR);
+int getVerlagPos(Verlag verlage[],int *num_verlag,char *tmpVerlag,const int MAXVERLAG);
+int getVerlagPos(Verlag verlage[],int *num_verlag,char *tmpVerlag,const int MAXVERLAG);
+void printTopVerlage(Verlag* vPerm[],int num_verlag,int N);
+int cmpVerlage(const void *a,const void *b);
+void createAuthorPerm(Autor *aPerm[],Autor autoren[],int MAXAUTOR);
+void printTopAutoren(Autor* aPerm[],int num_autor,int N);
+int cmpAutoren(const void *a,const void *b);
 
 #endif

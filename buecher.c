@@ -1,9 +1,9 @@
 /***********************************************************************
- * buecher  (IN2, Übungsaufgabe 1)
+ * buecher  (IN2, ï¿½bungsaufgabe 1)
  * Liest Buecherliste, erzeugt (statische) arrays
- * von Büchern, Autoren, Verlagen.
- * Gibt Bücherliste in Einlese-Reihenfolge und Top-20
- * (nach Anzahl der Bücher) der Autoren- und Verlageliste aus.
+ * von Bï¿½chern, Autoren, Verlagen.
+ * Gibt Bï¿½cherliste in Einlese-Reihenfolge und Top-20
+ * (nach Anzahl der Bï¿½cher) der Autoren- und Verlageliste aus.
  *
  * Autor: H. Radners (Rumpfprogramm)
  ***********************************************************************/
@@ -11,21 +11,21 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "buecher_func.h"
+#include "lib/buecher_func.h"
 
 int main() {
 
    enum {
-      MAXBUCH   = 1000, /* Maximalzahl Bücher */
+      MAXBUCH   = 1000, /* Maximalzahl Bï¿½cher */
       MAXAUTOR  =  300, /* Maximalzahl Autoren */
       MAXVERLAG =  100, /* Maximalzahl Verlage */
-      NUMTOP    =   20, /* Größe Bestenliste */
+      NUMTOP    =   20, /* Grï¿½ï¿½e Bestenliste */
    };
 
-   Buch   buecher[MAXBUCH];   /* array der Bücher */
+   Buch   buecher[MAXBUCH];   /* array der Bï¿½cher */
    Autor  autoren[MAXAUTOR];  /* array der unterschiedlichen Autoren */
    Verlag verlage[MAXVERLAG]; /* array der unterschiedlichen Verlage */
-   int num_buch   = 0;        /* Anzahl eingelesener Bücher */
+   int num_buch   = 0;        /* Anzahl eingelesener Bï¿½cher */
    int num_autor  = 0;        /* Anzahl eingelesener, unterschiedl. Autoren */
    int num_verlag = 0;        /* Anzahl eingelesener, unterschiedl. Verlage */
 
@@ -34,7 +34,7 @@ int main() {
 
 
    /*************************************************************
-    * Bücher-Datensätze einlesen und speichern
+    * Bï¿½cher-Datensï¿½tze einlesen und speichern
     *************************************************************/
 
    printf("\nBuecher-Liste\n");
@@ -47,7 +47,7 @@ int main() {
       return 1;
    }
 
-   /* alle Bücher-Datensätze einlesen */
+   /* alle Bï¿½cher-Datensï¿½tze einlesen */
    buecher_read(infile, buecher, &num_buch, MAXBUCH,
                 autoren, &num_autor, MAXAUTOR,
                 verlage, &num_verlag, MAXVERLAG);
