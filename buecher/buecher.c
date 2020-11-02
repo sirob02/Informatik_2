@@ -1,0 +1,78 @@
+/***********************************************************************
+ * buecher  (IN2, Übungsaufgabe 1)
+ * Liest Buecherliste, erzeugt (statische) arrays
+ * von Büchern, Autoren, Verlagen.
+ * Gibt Bücherliste in Einlese-Reihenfolge und Top-20
+ * (nach Anzahl der Bücher) der Autoren- und Verlageliste aus.
+ *
+ * Autor: H. Radners (Rumpfprogramm)
+ ***********************************************************************/
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "buecher_func.h"
+
+int main() {
+
+   enum {
+      MAXBUCH   = 1000, /* Maximalzahl Bücher */
+      MAXAUTOR  =  300, /* Maximalzahl Autoren */
+      MAXVERLAG =  100, /* Maximalzahl Verlage */
+      NUMTOP    =   20, /* Größe Bestenliste */
+   };
+
+   Buch   buecher[MAXBUCH];   /* array der Bücher */
+   Autor  autoren[MAXAUTOR];  /* array der unterschiedlichen Autoren */
+   Verlag verlage[MAXVERLAG]; /* array der unterschiedlichen Verlage */
+   int num_buch   = 0;        /* Anzahl eingelesener Bücher */
+   int num_autor  = 0;        /* Anzahl eingelesener, unterschiedl. Autoren */
+   int num_verlag = 0;        /* Anzahl eingelesener, unterschiedl. Verlage */
+
+   FILE *infile;              /* filepointer Eingabedatei */
+   char infilename[] = "buecherliste.csv";
+
+
+   /*************************************************************
+    * Bücher-Datensätze einlesen und speichern
+    *************************************************************/
+
+   printf("\nBuecher-Liste\n");
+   printf("=============\n\n");
+
+   /* Eingabedatei oeffnen und pruefen */
+   if ((infile = fopen(infilename, "r")) == NULL) {
+      fprintf(stderr, " *** Fehler: Kann '%s' nicht zum Lesen oeffnen!\n",
+              infilename);
+      return 1;
+   }
+
+   /* alle Bücher-Datensätze einlesen */
+   buecher_read(infile, buecher, &num_buch, MAXBUCH,
+                autoren, &num_autor, MAXAUTOR,
+                verlage, &num_verlag, MAXVERLAG);
+
+   /* Eingabedatei schliessen und Kontrollmeldung */
+   fclose(infile);
+   printf("Es wurden %d Buecher-Datensaetze\n", num_buch);
+   printf("aus %d unterschiedlichen Verlagen\n", num_verlag);
+   printf("von %d unterschiedlichen Autoren eingelesen.\n\n", num_autor);
+
+
+   /*************************************************************
+    * Ergebnis-Ausgabe
+    *************************************************************/
+
+   printf("=== Eingelesene Buecher ===\n");
+   buecher_print(buecher, num_buch);
+
+   printf("=== Top%d Verlage sortiert nach Anzahl Buecher ===\n", NUMTOP);
+   /* TODO */
+   printf("\n");
+
+   printf("=== Top%d Autoren sortiert nach Anzahl Buecher ===\n", NUMTOP);
+   /* TODO */
+   printf("\n\n");
+
+   return 0;
+}
