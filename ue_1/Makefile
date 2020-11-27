@@ -1,18 +1,25 @@
 CC = gcc
-CFLAGS = -Wall -g
+
+INCDIR = ./list
+CPPFLAGS = -I${INCDIR}
+CFLAGS = -g -Wall
 #CFLAGS = -g0 -O3
 
-OBJS = buecher.o func/buecher_func.o func/buecher_utilitys.o
+OBJS = buecher.o buecher_func.o
+LOBJS = ${INCDIR}/list.o
 EXE = buecher
 
-${EXE}: ${OBJS}
-	${CC} -o $@ ${OBJS}
+${EXE}: ${OBJS} list_obj
+	${CC} -o $@ ${OBJS} ${LOBJS}
 
-${OBJS}: lib/buecher_func.h
+${OBJS}: buecher_func.h ${INCDIR}/list.h
+
+list_obj:
+	cd ${INCDIR}; ${MAKE} all "CC=${CC}" "CFLAGS=${CFLAGS}"
 
 run: ${EXE}
 	./${EXE}
 
 clean:
-	/bin/rm -f ${OBJS} core *.o ${EXE}
+	/bin/rm -f core *.o; cd ${INCDIR}; ${MAKE} clean
 
